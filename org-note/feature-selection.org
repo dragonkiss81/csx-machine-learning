@@ -1,0 +1,328 @@
+#+TITLE: 特徵選取 Feature Selection
+#+SUBTITLE: 少年圖靈計畫
+#+DATE: 2016/10/17 (一)
+#+AUTHOR: rcwangtw
+#+EMAIL: rcwang.tw@gmail.com
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
+#+OPTIONS: e:t email:nil f:t inline:t num:nil p:nil pri:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:nil todo:t |:t
+
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+
+#+GOOGLE_PLUS: https://plus.google.com/rcwangtw
+#+WWW: http://rcwangtw.github.io/
+#+GITHUB: http://github.com/rcwangtw
+#+TWITTER: rcwangtw
+
+#+FAVICON: images/ricky.png
+#+ICON: images/ricky.png
+#+HASHTAG: feature selection, test, test
+
+# Fork me ribbon
+#+BEGIN_HTML
+<a href="https://github.com/rcwangtw/csx-machine-learning">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+</a>
+#+END_HTML
+
+* 特徵選取 Feature selection
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+*** 特徵 (feature)
+特徵的定義：
+#+BEGIN_QUOTE
+依據所要解決的問題，特徵指的是能從資料中能找到重複出現的線索。
+#+END_QUOTE
+
+使用特徵選取的方法，意味著你 =假設= ：
+
+- 資料存在許多無關的特徵，例如雜訊、留白
+- 移除這些無關的特徵，不會遺漏解決問題所要的資訊（還遺漏怎辦？）
+- 特徵能指向問題的解決方案，例如提供預測、分類或決策上的依據
+
+#  一個人的人臉
+
+*** 對角線矩陣的對角線特徵
+
+#+BEGIN_HTML
+\begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1\\
+\end{bmatrix}
+#+END_HTML
+
+#+BEGIN_CENTER
+上面是一個對角線矩陣，我們可以發現他有很大的留白（零值）\\
+我們怎麼描述他的對角線特徵？
+#+END_CENTER
+
+*** 對角線矩陣的對角線特徵
+
+#+BEGIN_HTML
+$$ \begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{bmatrix} \cdot \begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{bmatrix} = 3 $$
+#+END_HTML
+
+#+BEGIN_CENTER
+我們可以發現，對角線矩陣「點乘」對角線矩陣是最大值
+#+END_CENTER
+
+#+BEGIN_QUOTE
+投影片談的「矩陣」若無強調，指的都是「0,1」構成的矩陣
+#+END_QUOTE
+
+*** 對角線矩陣的對角線特徵
+
+#+BEGIN_HTML
+$$ \begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{bmatrix} \cdot \begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 0
+\end{bmatrix} = 2 $$
+
+$$ \begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{bmatrix} \cdot \begin{bmatrix}
+1 & 0 & 0\\
+0 & 0 & 0\\
+0 & 0 & 0
+\end{bmatrix} = 1 $$
+#+END_HTML
+
+#+BEGIN_CENTER
+稍微有點殘缺的對角線，點乘的值也很大，約為 1 到 2
+#+END_CENTER
+
+*** 對角線矩陣的對角線特徵
+
+#+BEGIN_HTML
+$$ \begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{bmatrix} \cdot \begin{bmatrix}
+0 & 1 & 1\\
+0 & 1 & 0\\
+1 & 1 & 0
+\end{bmatrix} = 1 $$
+
+$$ \begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{bmatrix} \cdot \begin{bmatrix}
+0 & 1 & 0\\
+1 & 0 & 1\\
+0 & 1 & 0
+\end{bmatrix} = 0 $$
+#+END_HTML
+
+#+BEGIN_CENTER
+不是對角線的矩陣，點乘就得到普通的值，約為 0 到 1
+#+END_CENTER
+
+
+*** 對角線矩陣的對角線特徵
+
+#+BEGIN_HTML
+$$ \begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{bmatrix} \cdot \begin{bmatrix}
+0 & 1 & 1\\
+0 & 1 & 0\\
+1 & 1 & 0
+\end{bmatrix} = 1 $$
+#+END_HTML
+
+#+BEGIN_CENTER
+因此，我們就能明白一件事情，點乘對角線矩陣之後的值，\\
+可以用來衡量該矩陣的對角線特徵的強度！
+#+END_CENTER
+
+#+BEGIN_HTML
+$$ A \cdot B = k $$
+#+END_HTML
+
+故若 A 為某矩陣，B 為「特徵矩陣」點乘值為 k ，則 k 可看作是矩陣 A 的特徵值。
+
+*** 對角線矩陣的對角線特徵
+
+#+BEGIN_HTML
+$$ A \cdot B = k $$
+#+END_HTML
+
+事實上，在資訊領域中我們較長稱呼
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* no
+#+BEGIN_SRC emacs-lisp
+  (def hello-world ()
+       (message "hello world!"))
+#+END_SRC
+** rrr
+** This Is A "Segue Page" Demo
+:PROPERTIES:
+:SLIDE: segue dark quote
+:ASIDE: right bottom
+:ARTICLE: flexbox vleft auto-fadein
+:END:
+   Text content of *Segue page* will appear here.
+
+   Use =C-c C-x f= to create footnotes =[fn:N]=, which will be placed under a slide[fn:1]:
+
+** Verse Block
+  :PROPERTIES:
+  :ARTICLE:  smaller
+  :END:
+Verse block is similar with quote's, but it will keeps line break. Take a poem as example:
+
+#+BEGIN_VERSE
+眾里尋他千百度
+驀然回首
+那人卻在
+燈火闌珊處
+  -- 辛棄疾〈青玉案〉
+#+END_VERSE
+
+#+BEGIN_SRC org
+,#+BEGIN_VERSE
+眾里尋他千百度
+驀然回首
+那人卻在
+燈火闌珊處
+  -- 辛棄疾〈青玉案〉
+,#+END_VERSE
+#+END_SRC
+
+
+
+** Insert Image
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 700px
+[[file:images/sky.jpg]]
+#+END_CENTER
+
+#+BEGIN_SRC org
+,#+BEGIN_CENTER
+,#+ATTR_HTML: :width 400px
+[[file:images/sky.jpg]]
+,#+END_CENTER
+#+END_SRC
+** Fill Image
+  :PROPERTIES:
+  :FILL:     images/sky.jpg
+  :TITLE:    white
+  :SLIDE:    white
+  :END:
+Text is in white.
+#+BEGIN_SRC org
+  :PROPERTIES:
+  :FILL:     images/sky.jpg
+  :TITLE:    white
+  :SLIDE:    white
+  :END:
+#+END_SRC
+* Thank You Slide
+- Add the following properties to one headline:
+#+BEGIN_SRC org
+:SLIDE: thank-you-slide segue
+:ASIDE: right
+:ARTICLE: flexbox vleft auto-fadein
+#+END_SRC
+
+#+BEGIN_QUOTE
+*Both* =thank-you-slide= and =segue= are necessary!
+#+END_QUOTE
+** Smaller Arcticle
+  :PROPERTIES:
+  :ARTICLE:  smaller
+  :END:
+This slide has =:ARTICLE:  smaller= property, so has *smaller* content.
+#+BEGIN_SRC org
+  :PROPERTIES:
+  :ARTICLE:  smaller
+  :END:
+#+END_SRC
+
+** Footnote
+Use =C-c C-x f= to create footnotes =[fn:N]=, which will be placed under a slide[fn:1]:
+#+BEGIN_QUOTE
+Jump between footnotes with =C-c C-c= on =[fn:N]=.
+#+END_QUOTE
+#+BEGIN_SRC org
+ * Title
+   This is content text.[fn:1]
+...
+
+ * Footnotes
+ [fn:1] Footnote is in here!
+
+** Table
+Add a =*= prefix to highlight item.   e.g. =* Highlight Item=
+| Title1 | Title2            | Title2 |
+|--------+-------------------+--------|
+| Item1  | * Highlight Item  |     11 |
+| Item2  | Shiroshime Kanata |   * 25 |
+| Item3  | Test              |     56 |
+
+#+BEGIN_SRC org
+| Title1 | Title2            | Title2 |
+|--------+-------------------+--------|
+| Item1  | * Highlight Item  |     11 |
+| Item2  | Shiroshime Kanata |   * 25 |
+| Item3  | Test              |     56 |
+#+END_SRC
+
+
+
+
+* Thank You
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+** Footnotes
+
+[fn:1] Footnote is in here!

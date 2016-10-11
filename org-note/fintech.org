@@ -1,4 +1,4 @@
-#+TITLE: TensorFlow
+#+TITLE: FinTech Tech 金融科技的技術
 #+SUBTITLE: 少年圖靈計畫
 #+DATE: 2016/10/17 (一)
 #+AUTHOR: rcwangtw
@@ -30,5 +30,9 @@
 #+END_HTML
 
 
-* test
-** test yoyo
+* 金融的定義
+  - 時間尺度的資源配對
+
+** 時間的定義
+
+* 趨勢 Trends
