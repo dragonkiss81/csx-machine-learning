@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- 2016-10-14 �g�� 23:53 -->
+<meta  charset="utf-8" />
+<meta  htto-equiv="X-UA-Compatible" content="chrome=1" />
+<meta  name="generator" content="Org-mode with org-ioslide" />
+<meta  name="author" content="rcwangtw" />
+
+
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--This one seems to work all the time, but really small on ipad-->
+<!--<meta name="viewport" content="initial-scale=0.4">-->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" media="all" href="theme/css/default.css" />
+<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css" />
+<link rel="stylesheet" media="all" href="theme/css/small-icon.css" />
+<base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+<script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+
+   <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+<script src="js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML,local/local" type="text/javascript"></script>
+</head>
+<body style="opacity: 0">
+<slides class="layout-widescreen">
+<slide class="title-slide segue nobackground">
+       <aside class="gdbar"><img src="images/ricky.png"></aside>
+       <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+       <hgroup class="auto-fadein">
+         <h1 data-config-title><!-- populated from slide_config.json --></h1>
+         <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+         <p data-config-presenter><!-- populated from slide_config.json --></p>
+       </hgroup>
+    </slide>
+  <a href="https://github.com/rcwangtw/csx-machine-learning">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+</a>
+
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/ricky.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline21" class="outline-2">
+<h2 id="orgheadline21">特徵選取 Feature selection</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline1" class="outline-4">
+<h4 id="orgheadline1">特徵 (feature)</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+特徵的定義：
+</p>
+<blockquote>
+<p>
+依據所要解決的問題，特徵指的是能從資料中能找到重複出現的線索。
+</p>
+</blockquote>
+
+<p>
+使用特徵選取的方法，意味著你 <code>假設</code> ：
+</p>
+
+<ul>
+<li>資料存在許多無關的特徵，例如雜訊、留白</li>
+<li>移除這些無關的特徵，不會遺漏解決問題所要的資訊（還遺漏怎辦？）</li>
+<li>特徵能指向問題的解決方案，例如提供預測、分類或決策上的依據</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline2" class="outline-4">
+<h4 id="orgheadline2">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+ \begin{bmatrix}
+\color{red}1 & 0 & 0\\
+ 0 & \color{red}1 & 0\\
+ 0 & 0 & \color{red}1\\
+ \end{bmatrix}
+
+<article class="flexbox vcenter">
+<p>
+上面是一個對角線矩陣，我們可以發現他有很大的留白（零值）<br  />
+我們怎麼描述他的對角線特徵？
+</p>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+$$ \begin{bmatrix}
+\color{blue}1 & 0 & 0\\
+0 & \color{blue}1 & 0\\
+0 & 0 & \color{blue}1
+\end{bmatrix} \cdot \begin{bmatrix}
+\color{red}1 & 0 & 0\\
+0 & \color{red}1 & 0\\
+0 & 0 & \color{red}1
+\end{bmatrix} = 3 $$
+
+<article class="flexbox vcenter">
+<p>
+我們可以發現，對角線矩陣「點乘」對角線矩陣後相加是3
+</p>
+</article>
+
+<blockquote>
+<p>
+「點乘」指的是矩陣元素對應相乘，矩陣範例未強調則皆為「0, 1」矩陣
+</p>
+</blockquote>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+$$ \begin{bmatrix}
+\color{blue}1 & 0 & 0\\
+0 & \color{blue}1 & 0\\
+0 & 0 & \color{blue}1
+\end{bmatrix} \cdot \begin{bmatrix}
+\color{red}1 & 0 & 0\\
+0 & \color{red}1 & 0\\
+0 & 0 & 0
+\end{bmatrix} = 2 $$
+
+$$ \begin{bmatrix}
+\color{blue}1 & 0 & 0\\
+0 & \color{blue}1 & 0\\
+0 & 0 & \color{blue}1
+\end{bmatrix} \cdot \begin{bmatrix}
+\color{red}1 & 0 & 0\\
+0 & 0 & 0\\
+0 & 0 & 0
+\end{bmatrix} = 1 $$
+
+<article class="flexbox vcenter">
+<p>
+稍微有點殘缺的對角線，點乘的總和值也很大，約為 1 到 2
+</p>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+$$ \begin{bmatrix}
+\color{blue}1 & 0 & 0\\
+0 & \color{blue}1 & 0\\
+0 & 0 & \color{blue}1
+\end{bmatrix} \cdot \begin{bmatrix}
+0 & \color{red}1 & \color{red}1\\
+0 & \color{red}1 & 0\\
+\color{red}1 & \color{red}1 & 0
+\end{bmatrix} = 1 $$
+
+$$ \begin{bmatrix}
+\color{blue}1 & 0 & 0\\
+0 & \color{blue}1 & 0\\
+0 & 0 & \color{blue}1
+\end{bmatrix} \cdot \begin{bmatrix}
+0 & \color{red}1 & 0\\
+\color{red}1 & 0 & \color{red}1\\
+0 & \color{red}1 & 0
+\end{bmatrix} = 0 $$
+
+<article class="flexbox vcenter">
+<p>
+不是對角線的矩陣，點乘就得到普通的總和，約為 0 到 1
+</p>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+$$
+\begin{bmatrix}
+0 & \color{red}1 & \color{red}1\\
+0 & \color{red}1 & 0\\
+\color{red}1 & \color{red}1 & 0
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\color{blue}1 & 0 & 0\\
+0 & \color{blue}1 & 0\\
+0 & 0 & \color{blue}1
+\end{bmatrix} = 1
+$$
+
+<article class="flexbox vcenter">
+<p>
+因此，我們就能明白一件事情，點乘對角線矩陣之後的值，<br  />
+可以用來衡量該矩陣的對角線特徵的強度！
+</p>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+$$
+\begin{bmatrix}
+\color{red}1 & 0 & 0\\
+0 & \color{red}1 & 0\\
+0 & 0 & 0
+\end{bmatrix}
+\ \ vs.\ \
+\begin{bmatrix}
+\color{red}1 & 0 & 0\\
+0 & 0 & 0\\
+0 & 0 & \color{red}1
+\end{bmatrix}
+$$
+
+<article class="flexbox vcenter">
+<p>
+上面這兩個矩陣，很明顯左邊更有對角線的感覺。<br  />
+為什麼？因為要「連著」才是線嘛！（個人偏見）<br  />
+<br  />
+這兩個的特徵強度都是 2 ，我們怎麼改進這個方法呢？
+</p>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+<p>
+那就是使用更小的特徵矩陣！暫時叫他「小對角線」特徵
+</p>
+</article>
+$$
+\begin{bmatrix}
+\color{blue}1 & 0\\
+0 & \color{blue}1\\
+\end{bmatrix}
+$$
+<article class="flexbox vcenter">
+<p>
+然而&#x2026;. 這怎麼乘？（或許你已經猜到大半了）
+</p>
+</article>
+$$
+\begin{bmatrix}
+\color{red}1 & 0 & 0\\
+0 & \color{red}1 & 0\\
+0 & 0 & \color{red}1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\color{blue}1 & 0\\
+0 & \color{blue}1\\
+\end{bmatrix} = ?!
+$$
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+<p>
+我們要來用「滾動的點乘」來看，注意下方變動的橘色數字：
+</p>
+</article>
+$$
+\begin{bmatrix}
+\color{orange}1 & 0 & 0\\
+0 & \color{orange}1 & 0\\
+0 & 0 & 1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\color{blue}1 & 0\\
+0 & \color{blue}1\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\color{orange}2 & \\
+ &  \\
+\end{bmatrix}
+$$
+<article class="flexbox vcenter">
+<p>
+你可以來回切換前後頁投影片觀察動態的變化
+</p>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+<p>
+我們要來用「滾動的點乘」來看，注意下方變動的橘色數字：
+</p>
+</article>
+$$
+\begin{bmatrix}
+1 & \color{orange}0 & 0\\
+0 & 1 & \color{orange}0\\
+0 & 0 & 1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\color{blue}1 & 0\\
+0 & \color{blue}1\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+2 & \color{orange}0\\
+ &  \\
+\end{bmatrix}
+$$
+<article class="flexbox vcenter">
+<p>
+你可以來回切換前後頁投影片觀察動態的變化
+</p>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline11" class="outline-4">
+<h4 id="orgheadline11">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+<p>
+我們要來用「滾動的點乘」來看，注意下方變動的橘色數字：
+</p>
+</article>
+$$
+\begin{bmatrix}
+1 & 0 & 0\\
+\color{orange}0 & 1 & 0\\
+0 &  \color{orange}0 & 1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\color{blue}1 & 0\\
+0 & \color{blue}1\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+2 & 0\\
+\color{orange}0 &  \\
+\end{bmatrix}
+$$
+<article class="flexbox vcenter">
+<p>
+你可以來回切換前後頁投影片觀察動態的變化
+</p>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+<p>
+我們要來用「滾動的點乘」來看，注意下方變動的橘色數字：
+</p>
+</article>
+$$
+\begin{bmatrix}
+1 & 0 & 0\\
+0 & \color{orange}1 & 0\\
+0 & 0 &  \color{orange}1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\color{blue}1 & 0\\
+0 & \color{blue}1\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+2 & 0\\
+0 & \color{orange}2  \\
+\end{bmatrix}
+$$
+<article class="flexbox vcenter">
+<p>
+你可以來回切換前後頁投影片觀察動態的變化
+</p>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class="fill white nobackground" style="background-image: url(images/comic001.png)">
+<hgroup class="">
+       <h2 class="white "><div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13">.</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline14" class="outline-4">
+<h4 id="orgheadline14">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+$$
+\begin{bmatrix}
+ \color{orange}1 & 0 & 0\\
+0 & \color{orange}1 & 0\\
+0 & 0 &  \color{orange}1
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\color{blue}1 & 0\\
+0 & \color{blue}1\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\color{orange}2 & 0\\
+0 & \color{orange}2  \\
+\end{bmatrix}
+$$
+<article class="flexbox vcenter">
+<p>
+而且以「小對角線」特徵點乘總和出來的矩陣，也有「小對角線」特徵！<br  />
+<br  />
+我們在用「小對角線」特徵點乘總和一次，看看得到的特徵強度為何：
+</p>
+</article>
+$$
+\begin{bmatrix}
+\color{orange}2 & 0\\
+0 & \color{orange}2  \\
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\color{blue}1 & 0\\
+0 & \color{blue}1\\
+\end{bmatrix}
+=  \color{orange}4
+$$
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline15" class="outline-4">
+<h4 id="orgheadline15">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+$$
+\begin{bmatrix}
+\color{orange}1 & 0 & 0\\
+0 & \color{orange}1 & 0\\
+0 & 0 & 0
+\end{bmatrix}
+\ \ vs.\ \
+\begin{bmatrix}
+\color{orange}1 & 0 & 0\\
+0 & 0 & 0\\
+0 & 0 & \color{orange}1
+\end{bmatrix}
+$$
+<article class="flexbox vcenter">
+<p>
+那我們是否能解決前面這個範例，特徵強度的判斷問題呢？
+</p>
+</article>
+$$
+\begin{bmatrix}
+\color{orange}1 & 0 & 0\\
+0 & \color{orange}1 & 0\\
+0 & 0 & 0\\
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\color{blue}1 & 0\\
+0 & \color{blue}1\\
+\end{bmatrix}
+\rightarrow
+\begin{bmatrix}
+\color{orange}2 & 0\\
+0 & 0\\
+\end{bmatrix}
+\rightarrow  \color{orange}2 \ ,\ \
+\begin{bmatrix}
+\color{orange}1 & 0 & 0\\
+0 & 0 & 0\\
+0 & 0 &  \color{orange}1\\
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\color{blue}1 & 0\\
+0 & \color{blue}1\\
+\end{bmatrix}
+\rightarrow
+\begin{bmatrix}
+\color{orange}1 & 0\\
+0 & \color{orange}1\\
+\end{bmatrix}
+\rightarrow  \color{orange}2
+$$
+<article class="flexbox vcenter">
+<p>
+好吧，或許真的是我的偏見，這兩個矩陣都具有相同強度的對角線特徵　&#x2026;
+</p>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline16" class="outline-4">
+<h4 id="orgheadline16">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+<p>
+除此之外，我們也可以發現用「小對角線」特徵的有趣之處，觀察此範例：
+</p>
+</article>
+$$
+\begin{bmatrix}
+0 & \color{orange}1 & 0\\
+0 & 0 & \color{orange}1\\
+0 & 0 & 0
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\color{blue}1 & 0\\
+0 & \color{blue}1
+\end{bmatrix}
+\rightarrow
+\begin{bmatrix}
+\color{green}0 & \color{green}1\\
+\color{green}0 & \color{green}0
+\end{bmatrix}
+\rightarrow \color{green}0
+$$
+
+<article class="flexbox vcenter">
+<p>
+注意到了嗎？原始矩陣也似乎具有對角線特徵，然而不幸的，<br  />
+他的位置不在正確的對角線上面，最終對角線特徵點乘總和是 0 <br  />
+<br  />
+但是，綠色矩陣的右上角那個「1」似乎有什麼隱藏意義？
+</p>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline17" class="outline-4">
+<h4 id="orgheadline17">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+$$
+\begin{bmatrix}
+0 & \color{orange}1 & 0\\
+0 & 0 & \color{orange}1\\
+0 & 0 & 0
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\color{blue}1 & 0\\
+0 & \color{blue}1
+\end{bmatrix}
+\rightarrow
+\begin{bmatrix}
+\color{green}0 & \color{green}1\\
+\color{green}0 & \color{green}0
+\end{bmatrix}
+$$
+<article class="flexbox vcenter">
+<p>
+是的，右上角的 1 代表著，原本矩陣有「小對角線」在右上方。<br  />
+所以，綠色矩陣可以看做是一個特徵矩陣，代表著右上角有著小對角線特徵。<br  />
+<br  />
+通常，我們就會稱綠色矩陣叫做「特徵」。<br  />
+請回憶我們提到「特徵」的定義，再來看這個特徵矩陣是否吻合。
+</p>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline18" class="outline-4">
+<h4 id="orgheadline18">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+$$
+\begin{bmatrix}
+0 & 1 & 0\\
+0 & 0 & 1\\
+0 & 0 & 0
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\color{blue}1 & \color{blue}0\\
+\color{blue}0 & \color{blue}1
+\end{bmatrix}
+\rightarrow
+\begin{bmatrix}
+0 & 1\\
+0 & 0
+\end{bmatrix}
+$$
+<article class="flexbox vcenter">
+<p>
+而我們也會稱藍色矩陣叫做「編碼器」<br  />
+對具有 2x2 小對角線特徵的任何矩陣，編碼為一個 N-1 x N-1 的「特徵」。<br  />
+<br  />
+「特徵」的元素大小，代表著這個「小對角線」在該方位具有具有越明顯特徵。
+</p>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline19" class="outline-4">
+<h4 id="orgheadline19">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+$$
+\begin{bmatrix}
+0 & \color{orange}1 & 0\\
+0 & 0 & \color{orange}1\\
+0 & 0 & 0
+\end{bmatrix}
+\color{orange}\cdot
+\begin{bmatrix}
+\color{orange}1 & 0\\
+0 & \color{orange}1
+\end{bmatrix}
+\color{orange}\rightarrow
+\begin{bmatrix}
+0 & \color{orange}1\\
+0 & 0
+\end{bmatrix}
+$$
+<article class="flexbox vcenter">
+<p>
+而點乘總和這個數學運算方法，在這邊我們稱作「捲積」。<br  />
+也就是說這個運算方法是對原始矩陣進行「捲動」（總和）的「積」（點乘）。
+</p>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline20" class="outline-4">
+<h4 id="orgheadline20">範例：對角線矩陣的對角線特徵</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+因此整個「特徵選取」的過程，就是一個資料藉由編碼之後，得到特徵的動作。
+</p>
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/figure1.png" alt="figure1.png" width="750px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/ricky.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline31" class="outline-2">
+<h2 id="orgheadline31">自動編碼器 AutoEncoder</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22">自動編碼器 AutoEncoder</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/figure2.png" alt="figure2.png" width="900px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline23" class="outline-3">
+<h3 id="orgheadline23">自動編碼器 AutoEncoder</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>自動編碼器由兩個網路組成，分別是「編碼」網路和「解碼」網路</li>
+<li>編碼器 Encoder ：
+<ul>
+<li>特徵壓縮 Feature Compression</li>
+<li>特徵表達 Feature Representation</li>
+</ul></li>
+<li>解碼器 Decoder ：
+<ul>
+<li>選擇涵蓋更大訊息量的特徵</li>
+<li>僅在訓練期間使用</li>
+</ul></li>
+</ul>
+
+
+</article>
+
+</slide>
+
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline24" class="outline-3">
+<h3 id="orgheadline24">自動編碼器範例 - 1. 匯入函式庫</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+import tensorflow as tf
+import numpy as np
+import math
+
+#import pandas as pd
+#import sys
+
+input = np.array([[2.0, 1.0, 1.0, 2.0],
+                 [-2.0, 1.0, -1.0, 2.0],
+                 [0.0, 1.0, 0.0, 2.0],
+                 [0.0, -1.0, 0.0, -2.0],
+                 [0.0, -1.0, 0.0, -2.0]])
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline25" class="outline-3">
+<h3 id="orgheadline25">自動編碼器範例 - 2. 資料預處理</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+noisy_input = input + 0.2 * np.random.random_sample((input.shape)) - 0.1
+output      = input
+
+# Scale to [0,1]  ----------------------------------------------
+scaled_input_1  = np.divide(( noisy_input - noisy_input.min() ),
+                    ( noisy_input.max() - noisy_input.min() ))
+scaled_output_1 = np.divide(( output - output.min() ),
+                    ( output.max() - output.min() ))
+
+# Scale to [-1,1] -----------------------------------------------
+scaled_input_2  = ( scaled_input_1  * 2 ) - 1
+scaled_output_2 = ( scaled_output_1 * 2 ) - 1
+
+input_data  = scaled_input_2
+output_data = scaled_output_2
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline26" class="outline-3">
+<h3 id="orgheadline26">自動編碼器範例 - 3. 隱藏層 (特徵) 權重計算</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+# Autoencoder ---------------------------------------------------
+n_samp, n_input = input_data.shape
+n_hidden        = 2
+
+x  = tf.placeholder( "float", [None, n_input] )
+
+# Weights and biases to hidden layer ----------------------------
+Wh = tf.Variable(tf.random_uniform((n_input, n_hidden),
+        -1.0 / math.sqrt(n_input), 1.0 / math.sqrt(n_input)))
+bh = tf.Variable( tf.zeros([n_hidden]) )
+h  = tf.nn.tanh( tf.matmul(x,Wh) + bh )
+
+# tied weights --------------------------------------------------
+Wo = tf.transpose(Wh)
+bo = tf.Variable( tf.zeros([n_input]) )
+y  = tf.nn.tanh( tf.matmul(h,Wo) + bo )
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27">自動編碼器範例 - 4. 目標函數計算</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+# Objective functions -------------------------------------------
+y_            = tf.placeholder( "float", [None, n_input] )
+cross_entropy = -tf.reduce_sum( y_ * tf.log(y) )
+meansq        = tf.reduce_mean( tf.square( y_ - y ) )
+train_step    = tf.train.GradientDescentOptimizer( 0.05 )
+                  .minimize( meansq )
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline28" class="outline-3">
+<h3 id="orgheadline28">自動編碼器範例 - 5. TensorFlow 初始化</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+init = tf.initialize_all_variables()
+sess = tf.Session()
+sess.run( init )
+
+n_rounds = 5000
+batch_size = min( 50, n_samp )
+
+for i in range( n_rounds ):
+    sample = np.random.randint( n_samp, size=batch_size )
+    batch_xs = input_data[sample][:]
+    batch_ys = output_data[sample][:]
+    sess.run( train_step, feed_dict={x: batch_xs, y_:batch_ys} )
+    if i % 100 == 0:
+        print i,
+        print sess.run( cross_entropy , feed_dict={x: batch_xs, y_:batch_ys} )
+        print sess.run( meansq        , feed_dict={x: batch_xs, y_:batch_ys} )
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline29" class="outline-3">
+<h3 id="orgheadline29">自動編碼器範例 - 6. 結果顯示</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+print "Target:"
+print output_data
+
+print "Final activations:"
+print sess.run(y, feed_dict={x: input_data})
+
+print "Final weights (input =&gt; hidden layer)"
+print sess.run(Wh)
+print "Final biases (input =&gt; hidden layer)"
+print sess.run(bh)
+print "Final biases (hidden layer =&gt; output)"
+print sess.run(bo)
+print "Final activations of hidden layer"
+print sess.run(h, feed_dict={x: input_data})
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline30" class="outline-3">
+<h3 id="orgheadline30">堆棧式自動編碼器 Stacked Autoencoders</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/figure3.png" alt="figure3.png" width="1000px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/ricky.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline47" class="outline-2">
+<h2 id="orgheadline47">深度學習 Deep Learning</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline32" class="outline-3">
+<h3 id="orgheadline32">分散表示 Distributed Representation</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+深度學習中「分散表示」的假設：
+</p>
+
+<ol>
+<li>目標資料是由不同因素在不同層次間相互作用而產生的
+<ul>
+<li>迷思：目標資料隱藏許多訊息未被挖掘
+<ul>
+<li>這些資料真的存在多層次的相互作用嗎？</li>
+</ul></li>
+</ul></li>
+<li>越高層次的抽象特徵，可由低層次的特徵學習得到
+<ul>
+<li>留意：凸性傾向、省略預處理</li>
+</ul></li>
+</ol>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline33" class="outline-3">
+<h3 id="orgheadline33">捲積類神經網路 Convolutional Neural Network</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/figure4.png" alt="figure4.png" width="1000px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline34" class="outline-3">
+<h3 id="orgheadline34">捲積類神經網路範例 - 1. 輸入函數庫</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+import numpy as np
+import tensorflow as tf
+import matplotlib.pyplot as plt
+from tensorflow.examples.tutorials.mnist import input_data
+%matplotlib inline
+
+mnist = input_data.read_data_sets('data/', one_hot=True)
+trainimg   = mnist.train.images
+trainlabel = mnist.train.labels
+testimg    = mnist.test.images
+testlabel  = mnist.test.labels
+print ("Packages loaded.")
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline35" class="outline-3">
+<h3 id="orgheadline35">捲積類神經網路範例 - 2. 參數設置</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+# Parameters
+learning_rate   = 0.001
+training_epochs = 5
+batch_size      = 100
+display_step    = 1
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline36" class="outline-3">
+<h3 id="orgheadline36">捲積類神經網路範例 - 3. 網路設置</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+# Network
+
+n_input  = 784
+n_output = 10
+
+with tf.variable_scope("CNN_WEIGHTS"):
+    weights  = {
+        'wc1': tf.Variable( tf.random_normal([3, 3, 1, 64]   , stddev = 0.1 )),
+        'wc2': tf.Variable( tf.random_normal([3, 3, 64, 128] , stddev = 0.1 )),
+        'wd1': tf.Variable( tf.random_normal([7*7*128, 1024] , stddev = 0.1 )),
+        'wd2': tf.Variable( tf.random_normal([1024, n_output], stddev = 0.1 ))
+    }
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline37" class="outline-3">
+<h3 id="orgheadline37">捲積類神經網路範例 - 3. 初始化權重</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+# Network (cont.)
+
+with tf.variable_scope("CNN_BIASES"):
+    biases   = {
+        'bc1': tf.Variable(tf.random_normal([64]      , stddev = 0.1)),
+        'bc2': tf.Variable(tf.random_normal([128]     , stddev = 0.1)),
+        'bd1': tf.Variable(tf.random_normal([1024]    , stddev = 0.1)),
+        'bd2': tf.Variable(tf.random_normal([n_output], stddev = 0.1))
+    }
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline38" class="outline-3">
+<h3 id="orgheadline38">捲積類神經網路範例 - 3. 初始化權重</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+# Network (cont.)
+
+with tf.variable_scope("CNN_BIASES"):
+    biases   = {
+        'bc1': tf.Variable(tf.random_normal([64]      , stddev = 0.1)),
+        'bc2': tf.Variable(tf.random_normal([128]     , stddev = 0.1)),
+        'bd1': tf.Variable(tf.random_normal([1024]    , stddev = 0.1)),
+        'bd2': tf.Variable(tf.random_normal([n_output], stddev = 0.1))
+    }
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline39" class="outline-3">
+<h3 id="orgheadline39">捲積類神經網路範例 - 4. 建置各層網路</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+#CNN Basic
+
+def conv_basic(_input, _w, _b, _keepratio):
+
+    # Input
+    with tf.variable_scope("INPUT_LAYER"):
+        _input_r = tf.reshape(_input, shape=[-1, 28, 28, 1])
+
+    # Conv1
+    with tf.variable_scope("CNN_CONV_1"):
+        _conv1 = tf.nn.relu(tf.nn.bias_add(tf.nn.conv2d(_input_r, _w['wc1']
+                    , strides=[1, 1, 1, 1], padding='SAME'), _b['bc1']))
+    with tf.variable_scope("CNN_POOL_1"):
+        _pool1 = tf.nn.max_pool(_conv1, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1]
+                                , padding='SAME')
+        _pool_dr1 = tf.nn.dropout(_pool1, _keepratio)
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline40" class="outline-3">
+<h3 id="orgheadline40">捲積類神經網路範例 - 4. 建置各層網路</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+#CNN Basic (cont.)
+
+    # Conv2
+    with tf.variable_scope("CNN_CONV_2"):
+        _conv2 = tf.nn.relu(tf.nn.bias_add(tf.nn.conv2d(_pool_dr1, _w['wc2']
+                    , strides=[1, 1, 1, 1], padding='SAME'), _b['bc2']))
+
+    with tf.variable_scope("CNN_POOL_2"):
+        _pool2 = tf.nn.max_pool(_conv2, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1]
+                                , padding='SAME')
+        _pool_dr2 = tf.nn.dropout(_pool2, _keepratio)
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline41" class="outline-3">
+<h3 id="orgheadline41">捲積類神經網路範例 - 4. 建置各層網路</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+#CNN Basic (cont.)
+
+    with tf.variable_scope("FC_1"):
+
+        # Vectorize
+        _dense1 = tf.reshape(_pool_dr2, [-1, _w['wd1'].get_shape().as_list()[0]])
+
+        # Fc1
+        _fc1 = tf.nn.relu(tf.nn.bias_add(tf.matmul(_dense1, _w['wd1']), _b['bd1']))
+        _fc_dr1 = tf.nn.dropout(_fc1, _keepratio)
+
+    with tf.variable_scope("FC_2"):
+        # Fc2
+        _out = tf.add(tf.matmul(_fc_dr1, _w['wd2']), _b['bd2'])
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline42" class="outline-3">
+<h3 id="orgheadline42">捲積類神經網路範例 - 4. 建置各層網路 (回傳值)</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+#CNN Basic (cont.)
+
+    with tf.variable_scope("FC_1"):
+
+            # Return everything
+            out = {
+                'input_r': _input_r,
+                'conv1'  : _conv1, 'pool1': _pool1, 'pool1_dr1': _pool_dr1,
+                'conv2'  : _conv2, 'pool2': _pool2, 'pool_dr2' : _pool_dr2,
+                'dense1' : _dense1, 'fc1' : _fc1  , 'fc_dr1'   : _fc_dr1,
+                'out'    : _out }
+    return out
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline43" class="outline-3">
+<h3 id="orgheadline43">捲積類神經網路範例 - 5. TensorFlow 初始化</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+# tf Graph input
+x = tf.placeholder(tf.float32, [None, n_input], name="CNN_INPUT_x")
+y = tf.placeholder(tf.float32, [None, n_output], name="CNN_TARGET_y")
+keepratio = tf.placeholder(tf.float32, name="CNN_DROPOUT_keepratio")
+
+# Functions!
+pred = conv_basic(x, weights, biases, keepratio)['out']
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(pred, y))
+optm = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
+corr = tf.equal(tf.argmax(pred,1), tf.argmax(y,1)) # Count corrects
+accr = tf.reduce_mean(tf.cast(corr, tf.float32)) # Accuracy
+init = tf.initialize_all_variables()
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline44" class="outline-3">
+<h3 id="orgheadline44">捲積類神經網路範例 - 5. TensorFlow 設置 Summary</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+# Do some optimizations
+sess = tf.Session()
+sess.run(init)
+
+# Summary writer
+tf.scalar_summary('cross entropy', cost)
+tf.scalar_summary('accuracy'     , accr)
+merged         = tf.merge_all_summaries()
+summary_writer = tf.train.SummaryWriter('/tmp/tf_logs/cnn_mnist'
+                                        , graph=sess.graph)
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline45" class="outline-3">
+<h3 id="orgheadline45">捲積類神經網路範例 - 5. TensorFlow 設置 Summary</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+print ("Start!")
+
+for epoch in range(training_epochs):
+    avg_cost = 0.
+    total_batch = int(mnist.train.num_examples/batch_size)
+    # Loop over all batches
+    for i in range(total_batch):
+        batch_xs, batch_ys = mnist.train.next_batch(batch_size)
+        # Fit training using batch data
+        summary, _ = sess.run([merged, optm]
+                        , feed_dict={x: batch_xs, y: batch_ys, keepratio:0.7})
+        # Compute average loss
+        avg_cost += sess.run(cost
+                , feed_dict={x: batch_xs, y: batch_ys, keepratio:1.})/total_batch
+        # Add summary
+        summary_writer.add_summary(summary, epoch*total_batch+i)
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline46" class="outline-3">
+<h3 id="orgheadline46">捲積類神經網路範例 - 5. TensorFlow 設置 Summary</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="python">
+    # Display logs per epoch step
+    if epoch % display_step == 0:
+        print ("Epoch: %03d/%03d cost: %.9f" % (epoch, training_epochs, avg_cost))
+        train_acc = sess.run(accr, feed_dict={x: batch_xs, y: batch_ys, keepratio:1.})
+        print (" Training accuracy: %.3f" % (train_acc))
+        test_acc = sess.run(accr, feed_dict={x: testimg, y: testlabel, keepratio:1.})
+        print (" Test accuracy: %.3f" % (test_acc))
+
+print ("Optimization Finished.")
+</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/ricky.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline50" class="outline-2">
+<h2 id="orgheadline50">時間序列編碼</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline48" class="outline-3">
+<h3 id="orgheadline48">極座標轉換 Polar Coordinate</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<blockquote>
+<p>
+( Xt ) 為一時間序列
+</p>
+</blockquote>
+<p>
+利用反三角函數中的餘弦反函數處理「邊界問題」
+</p>
+$$
+\left\{\begin{matrix}
+\theta \ =& arccos( X_t )\ ,\ \ \ &-1 \leq X_t \leq 1\\
+\\
+r \ =& \frac{t}{N}\ ,\ \ \ &t = 1,\ 2,\ ...\ ,N
+\end{matrix}\right.
+$$
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline49" class="outline-3">
+<h3 id="orgheadline49">格拉姆夾角法 Gramian Angular Field</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<blockquote>
+<p>
+格拉姆矩陣是一種特殊矩陣
+</p>
+</blockquote>
+<p>
+利用格拉姆夾角法將極座標轉換成圖像：
+</p>
+$$
+\begin{pmatrix}
+cos(\phi_1+\phi_1) & \cdots & cos(\phi_1+\phi_n) \\
+cos(\phi_2+\phi_1) & \cdots & cos(\phi_2+\phi_n) \\
+\vdots  & \ddots  & \vdots \\
+cos(\phi_n+\phi_1) & \cdots & cos(\phi_n+\phi_n)
+\end{pmatrix}
+$$
+
+
+</article>
+
+</slide>
+
+</slide>
+
+
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/ricky.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline55" class="outline-2">
+<h2 id="orgheadline55">萬用啟發式演算法 Metaheuristics</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline51" class="outline-3">
+<h3 id="orgheadline51">反饋優先於預測</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/figure5.png" alt="figure5.png" width="1000px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline52" class="outline-3">
+<h3 id="orgheadline52">粒子群演算法 Particle Swarm Optimization, PSO</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline53" class="outline-3">
+<h3 id="orgheadline53">蟻群演算法 Ant Colony Optimal, ACO</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline54" class="outline-3">
+<h3 id="orgheadline54">人工免疫演算法 Artificial Immune Algorithm, AI</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/ricky.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline57" class="outline-2">
+<h2 id="orgheadline57">啟發式測試 ML Testing</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline56" class="outline-3">
+<h3 id="orgheadline56">機器學習演算法的穩健性</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>不穩定性
+<ul>
+<li>接縫測試 testing seams</li>
+</ul></li>
+<li>欠擬合
+<ul>
+<li>交叉驗證</li>
+</ul></li>
+<li>過擬合
+<ul>
+<li>基準測試 (奧卡姆剃刀法則, Occam's Razor)</li>
+</ul></li>
+<li>不可預測性
+<ul>
+<li>精度 (precision) 與查全率 (recall) 的追蹤</li>
+</ul></li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/ricky.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline59" class="outline-2">
+<h2 id="orgheadline59">個人偏見</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline58" class="outline-3">
+<h3 id="orgheadline58">個人偏見</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>符號主義</li>
+<li>原理研究(BSR)：不輕易做假設</li>
+<li>解釋性偏好：對你是雜訊，對我不是</li>
+<li>輕量級偏好：技術與業務的深度整合最為優先</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/ricky.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline60" class="outline-2">
+<h2 id="orgheadline60">Thank You</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide class="backdrop"></slide>
+</slides>
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+
+</html>

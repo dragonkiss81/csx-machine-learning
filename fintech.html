@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- 2016-10-12 �g�T 20:57 -->
+<meta  charset="utf-8" />
+<meta  htto-equiv="X-UA-Compatible" content="chrome=1" />
+<meta  name="generator" content="Org-mode with org-ioslide" />
+<meta  name="author" content="rcwangtw" />
+
+
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--This one seems to work all the time, but really small on ipad-->
+<!--<meta name="viewport" content="initial-scale=0.4">-->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" media="all" href="theme/css/default.css" />
+<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css" />
+<link rel="stylesheet" media="all" href="theme/css/small-icon.css" />
+<base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+<script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+
+   <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+<script src="js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML,local/local" type="text/javascript"></script>
+</head>
+<body style="opacity: 0">
+<slides class="layout-widescreen">
+<slide class="title-slide segue nobackground">
+       <aside class="gdbar"><img src="images/ricky.png"></aside>
+       <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+       <hgroup class="auto-fadein">
+         <h1 data-config-title><!-- populated from slide_config.json --></h1>
+         <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+         <p data-config-presenter><!-- populated from slide_config.json --></p>
+       </hgroup>
+    </slide>
+  <a href="https://github.com/rcwangtw/csx-machine-learning">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+</a>
+
+
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/ricky.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">金融的定義</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline1" class="outline-4">
+<h4 id="orgheadline1">時間的定義</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>時間尺度的資源配對</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline2" class="outline-4">
+<h4 id="orgheadline2">網路金融 IT-Fin 與金融科技 Fin-tech</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>網路金融著重在應用場景的創新
+<ul>
+<li>網路金融巨頭有優勢嗎？
+<ul>
+<li>巨頭優勢：入口、社群與價格優勢</li>
+</ul></li>
+</ul></li>
+<li>金融科技著重在技術層面的創新
+<ul>
+<li>技術與金融的深度整合（系統各層面）</li>
+<li>實驗部門：把新技術逐漸落實到業務流程中</li>
+</ul></li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3">金融數據資料如何取得</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>自己蒐集（直接）</li>
+<li>向第三方數據商採購（一層）</li>
+<li>第三方數據商和雲端服務合作，使用雲端平台就能得到資料。（兩層）</li>
+<li>越多的方便，越能快速建立產品服務，但成本結構也會越深</li>
+<li>思考：技術人如何做出別人沒有的數據
+<ul>
+<li>數據質量、數據粒度、跨平台
+<ul>
+<li>數據清洗後的 (1)專業分類、(2) 智慧預處理</li>
+<li>例子：LinkedIn 知識圖譜 = (3) 系統各層面的垂直搜尋引擎</li>
+<li>類人思維的交互表層</li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4">金融領域應用機器學習的數據困境</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>數據量太少
+<ul>
+<li>缺少訓練數據
+<ul>
+<li>網路金融到金融科技都一樣</li>
+<li>金融科技的不同：多了人的維度</li>
+</ul></li>
+<li>冷啟動</li>
+</ul></li>
+
+<li>數據維度太多
+<ul>
+<li>特徵維度成正比</li>
+<li>特徵維度和可解釋性成反比</li>
+<li>可解釋性與客戶留存成正比
+<ul>
+<li>複雜的應用場景：難以風控和透明化</li>
+<li>個人偏見：還是要又專家把控特徵與解釋性</li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/ricky.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline12" class="outline-2">
+<h2 id="orgheadline12">趨勢 Trends</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+<p>
+test
+</p>
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6">FinTech 的三個面向</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ol>
+<li>資金面的創新
+<ul>
+<li>資訊平台 (Juvo)
+<ul>
+<li>教育、工具、社群、交易</li>
+</ul></li>
+<li>記帳與支付工具(Qumram)、證券經紀 (Overbond, AutoGravity)
+<ul>
+<li>近場支付, 遠場支付</li>
+</ul></li>
+<li>財務管理 (MoneyDesktop)、機器人理財</li>
+</ul></li>
+<li>資產面的創新
+<ul>
+<li>市場股權、消費金融、企業貸款 (Sindeo)</li>
+</ul></li>
+<li>技術面的創新(監管套利?)
+<ul>
+<li>智慧投資分析 (Clinc Finie)</li>
+<li>大數據徵信、虛擬貨幣、智慧合約、區塊鏈</li>
+</ul></li>
+</ol>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7">FinTech 技術人怎麼和業務合作</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ol>
+<li>協助業務流程精簡
+<ul>
+<li>提高客戶的生命週期（降低客戶的流失率）</li>
+</ul></li>
+<li>提高業務數據的重複使用率
+<ul>
+<li>實時追蹤、知識沉澱</li>
+</ul></li>
+<li>高度客製化
+<ul>
+<li>特定的應用場景技術如何開發？</li>
+</ul></li>
+</ol>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8">FinTech 的最大挑戰</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ol>
+<li>客戶生命週期（客戶留存率）</li>
+<li>資金/資產的經手規模(AUM)成長力道</li>
+<li>隱私與數據安全（數據流、數據驗證）</li>
+
+<li>思考：技術人怎麼支持</li>
+</ol>
+
+
+</article>
+
+</slide>
+
+
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9">機器人理財 Robot-Advisor</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+test
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10">機器人理財的技術核心</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ol>
+<li>解決公開市場資訊的不對稱
+<ul>
+<li>為什麼原本有資訊不對稱？
+<ul>
+<li>不同專家個體化差異難以統合</li>
+<li>思考：憑什麼機器人能統合？</li>
+<li>被動投資 Beta 與主動投資 Alpha</li>
+<li>警惕：電風扇(傳統)與X光(Fintech)</li>
+</ul></li>
+</ul></li>
+
+<li>減少投資人情緒對市場的影響
+<ul>
+<li>為什麼投資人情緒會對市場有影響？
+<ul>
+<li>原因：金融市場交易的搓合制度</li>
+<li>思考：機器人理財真的能避免嗎？</li>
+</ul></li>
+</ul></li>
+
+<li>降低服務成本與服務門檻，擴大市場佔有率
+<ul>
+<li>為什麼靠機器人就能降低成本？
+<ul>
+<li>0.5%的管理費門檻</li>
+<li>思考：怎麼估計機器人系統的開發成本</li>
+</ul></li>
+<li>富人的理財方式適合一般人嗎？
+<ul>
+<li>例子：避險基金的最低投資門檻</li>
+</ul></li>
+</ul></li>
+</ol>
+
+<p>
+4.　
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline11" class="outline-4">
+<h4 id="orgheadline11">機器人理財的技術流程</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ol>
+<li>了解用戶的風險偏好
+<ol>
+<li></li>
+
+<li>騰訊金融:敏感係數(Delta)、安全係數</li>
+</ol></li>
+<li>基於不同的風險偏好，提供不同的資產配置方案</li>
+<li>自動化連結客戶的帳戶進行資產配置</li>
+<li>對資產配置結果，實時 (Real-Time) 進行追蹤
+<ol>
+<li>Colocation, Risk Parity</li>
+</ol></li>
+<li>穩健達到理財目標，執行客戶帳戶退場機制
+<ol>
+<li>惡劣的容災場景（N個9、底層隔離）</li>
+</ol></li>
+</ol>
+
+
+
+
+
+<p>
+test
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide class="backdrop"></slide>
+</slides>
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+
+</html>
