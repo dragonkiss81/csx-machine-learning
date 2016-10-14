@@ -1,0 +1,103 @@
+#+TITLE: 未來的 Tech Lead
+#+SUBTITLE: 少年圖靈計畫
+#+DATE: 2016/10/17 (一)
+#+AUTHOR: rcwangtw
+#+EMAIL: rcwang.tw@gmail.com
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
+#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
+#+OPTIONS: e:t email:nil f:t inline:t num:nil p:nil pri:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:nil todo:t |:t
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+
+#+GOOGLE_PLUS: https://plus.google.com/rcwangtw
+#+WWW: http://rcwangtw.github.io/
+#+GITHUB: http://github.com/rcwangtw
+#+TWITTER: rcwangtw
+
+#+FAVICON: images/ricky.png
+#+ICON: images/ricky.png
+#+HASHTAG: test, test, test
+
+# Fork me ribbon
+#+BEGIN_HTML
+<a href="https://github.com/rcwangtw/csx-machine-learning">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+</a>
+#+END_HTML
+
+
+
+
+
+*** Tech Lead 需要關注的三個技術面
+
+    1. 架構設計
+    2. 局部設計
+    3. 關鍵技術點
+
+*** 架構設計
+
+    1. 開發環境與平台，和程式語言
+    2. 需要和那些外部系統對接交互、第三方套件和工具(只能使用內部工具也太沒勁了)
+    3. 繪製一張整體架構圖
+       1. 虛線圈出需要解決的技術問題
+       2. 根據現實限制，用實線圈出要內部開發的區塊
+       3. 虛實之間就是你需要去找技術合作夥伴的點
+    4. 如何佈署各情境(測試/驗收)的系統，如何設計數據流？
+    5. 哪些步驟可以自動化，不能自動化的地方就是關鍵技術點(打造智慧工具去讓代碼維護工作變得更有效率也更有意思。)
+    6. 技術團隊的技能叢，是否具有解決技術開發問題的能力？
+
+
+*** 實務運作遇到的技術難題
+
+    1. 程式碼是否有壞味道（Bad Smell）
+    2. 局部設計有哪些部分會潛在造成整個系統明顯的損害？
+    3. 是否具有潛在威脅的測試能力？
+    4. 是否有能力持續優化設計模式與不斷重構？
+
+*** 監工問題
+
+
+1. 開發環境的監督
+   1. 環境設置與各種快捷鍵的規範
+   2. 程式碼撰寫的規範
+   3. 資料庫如何維持
+   4. 是否要把開發環境虛擬化
+2. 持續穩健的開發計畫的監督
+   1. 持續集成的環境和生產環境的差異的解決流程
+   2. 持續集成在整個技術開發流程的覆蓋範圍如何決定
+   3. 持續集成是否給予開發快速的反饋
+      1. 經常失敗的階段為何？
+      2. 「隨機失敗」的機率如何控制？
+      3. 從開發完畢到整個集成階段完成需要多少時間？
+      4. 什麼樣的情況事件會需要縮小或擴大持續集成環境？
+3. 測試流程的監督
+   1. 測試是否要實施TDD
+   2. 測試的粒度和系統
+
+http://www.infoq.com/cn/articles/thoughtworks-practice-part8
+
+*** 產品服務的交付能力：技術債與原型開發
+    - 原型：User Story Mapping
+
+*** 建立技術團隊的問題
+    - 產品開發方向是否能說明清楚
+    - 團隊文化是否能說明清楚
+    - 技術自主權：非技術人對技術的態度
+    - 遠程辦公
+    - 技術人才價值：( Function x Experience + Imact) / Risk
+    - 功能契合度 x 在該功能上的經驗 + 整體產品影響力 ) / 風險
+    - 產品開發月後期, Risk 越大
+    - 在我們的團隊裡會試著避免讓任何一個工程師接觸相同的代碼、產品或者數據庫超過三個月的時間
+    -  提倡一種全棧文化，團隊裡的每一個工程師都能夠承擔任一部分的編碼工作
+
+
+*** 少年問題
+    - 不懂得拒絕，使得業務難以聚焦
+    - 不懂得定價策略，產品服務收費過低
+    - 不懂包裝自己，不清楚如何建立品牌
+    - 不懂信任與放權, 團隊缺乏溝通, 無新血加入
