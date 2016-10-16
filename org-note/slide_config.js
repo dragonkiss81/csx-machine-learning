@@ -1,7 +1,7 @@
 var SLIDE_CONFIG = {
    // Slide Settings
    settings: {
-     title: '特徵選取 Feature Selection', 
+     title: '深度學習的數學原理入門', 
      subtitle: '少年圖靈計畫', 
      useBuilds: true, // Default: true. False will turn off slide animation builds. 
      usePrettify: true, // Default: true 
@@ -16,7 +16,7 @@ var SLIDE_CONFIG = {
  
    // Author information
    presenters: [{
-     name: 'rcwangtw', 
+     name: 'RICKY (rcwang.tw@gmail.com)', 
      company: '', 
      gplus: 'https://plus.google.com/rcwangtw', 
      twitter: 'rcwangtw', 

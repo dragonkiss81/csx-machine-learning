@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- 2016-10-15 �g�� 14:43 -->
+<meta  charset="utf-8" />
+<meta  htto-equiv="X-UA-Compatible" content="chrome=1" />
+<meta  name="generator" content="Org-mode with org-ioslide" />
+<meta  name="author" content="rcwangtw" />
+
+
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--This one seems to work all the time, but really small on ipad-->
+<!--<meta name="viewport" content="initial-scale=0.4">-->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" media="all" href="theme/css/default.css" />
+<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css" />
+<link rel="stylesheet" media="all" href="theme/css/small-icon.css" />
+<base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+<script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+
+   <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+<script src="js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML,local/local" type="text/javascript"></script>
+</head>
+<body style="opacity: 0">
+<slides class="layout-widescreen">
+<slide class="title-slide segue nobackground">
+       <aside class="gdbar"><img src="images/ricky.png"></aside>
+       <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+       <hgroup class="auto-fadein">
+         <h1 data-config-title><!-- populated from slide_config.json --></h1>
+         <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+         <p data-config-presenter><!-- populated from slide_config.json --></p>
+       </hgroup>
+    </slide>
+  <a href="https://github.com/rcwangtw/csx-machine-learning">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+</a>
+
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/ricky.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">金融的定義</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline1" class="outline-4">
+<h4 id="orgheadline1">金融的定義</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+「金融」是在時間尺度上進行資源交換的商業行為。
+</p>
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/figure6.png" alt="figure6.png" width="900px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">金融資料的特色</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>現代大數據的生成關鍵：人的維度
+<ul>
+<li>而大數據能挖掘出東西：人性（一致性）</li>
+<li>思考：金融資料有無此特性
+<ul>
+<li>提示：人的維度、人性 vs. 金融市場維度、心理</li>
+<li>冷啟動：金融模型「欠缺訓練資料」</li>
+</ul></li>
+</ul></li>
+<li>現代應用場景的關鍵：短時間尺度
+<ul>
+<li>大量大範圍數據 → 單次決策的優化</li>
+<li>短時間尺度的好處：一致性、獨立性</li>
+</ul></li>
+<li>金融模型應用場景：長時間尺度（金融的定義）
+<ul>
+<li>長時間尺度 → 場景交互作用 → 風控問題 → 模型解釋性問題</li>
+<li>資源交換 　→ 未來倚賴信任 → 監管問題 → 模型抽象限制問題</li>
+</ul></li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/ricky.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">金融技術的整合</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4">整合技術與業務</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ol>
+<li>協助業務流程精簡
+<ul>
+<li>提高客戶的生命週期</li>
+<li>降低客戶的流失率</li>
+</ul></li>
+<li>提高業務數據的重複使用率
+<ul>
+<li>實時追蹤</li>
+<li>知識沉澱</li>
+</ul></li>
+<li>高度客製化
+<ul>
+<li>思考：特定的應用場景技術如何開發？</li>
+</ul></li>
+</ol>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5">應用場景的挑戰</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ol>
+<li>Xps ( X per second )</li>
+<li>客戶生命週期</li>
+<li>資金/資產的經手規模 (AUM) 的成長率</li>
+<li>隱私與數據安全
+<ol>
+<li>數據流</li>
+<li>數據驗證</li>
+</ol></li>
+<li>思考：技術人怎麼給予業務支持</li>
+</ol>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/ricky.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11">機器人理財</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7">機器人理財的技術核心</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+解決公開市場資訊的不對稱
+</p>
+<ul>
+<li>為什麼原本有資訊不對稱？
+<ul>
+<li>不同專家個體化差異難以統合（哪個尺度？）</li>
+<li>思考：憑什麼機器人能統合？</li>
+<li>被動投資 Beta 與主動投資 Alpha</li>
+<li>警惕：電風扇 (傳統) 與X光 (FinTech)</li>
+</ul></li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8">機器人理財的技術核心</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+減少投資人情緒對市場的影響
+</p>
+<ul>
+<li>為什麼投資人情緒會對市場有影響？
+<ul>
+<li>原因：金融市場交易的搓合制度</li>
+<li>思考：機器人理財真的能避免嗎？</li>
+</ul></li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9">機器人理財的技術核心</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+降低服務成本與服務門檻，擴大市場佔有率
+</p>
+<ul>
+<li>為什麼靠機器人就能降低成本？
+<ul>
+<li>0.5%的管理費門檻</li>
+<li>思考：怎麼估計機器人系統的開發成本</li>
+</ul></li>
+<li>富人的理財方式適合一般人嗎？
+<ul>
+<li>例子：避險基金的最低投資門檻</li>
+</ul></li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10">機器人理財的技術流程</h4>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ol>
+<li>了解用戶的風險偏好
+<ol>
+<li>敏感係數 (Delta)</li>
+<li>安全係數</li>
+</ol></li>
+<li>基於不同的風險偏好，提供不同的資產配置方案</li>
+<li>自動化連結客戶的帳戶進行資產配置</li>
+<li>對資產配置結果，實時 (Real-Time) 進行追蹤
+<ol>
+<li>Colocation</li>
+<li>Risk Parity</li>
+</ol></li>
+<li>穩健達到理財目標，執行客戶帳戶退場機制
+<ol>
+<li>惡劣的容災場景（N個9、底層隔離）</li>
+</ol></li>
+</ol>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/ricky.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline13" class="outline-2">
+<h2 id="orgheadline13">智慧化資產管理</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">了解客戶風險偏好</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>資產管理有很多種：有房屋、土地、廠房設備、股票債券和貨幣。</li>
+<li>了解客戶的需求
+<ul>
+<li>客戶生命週期
+<ul>
+<li>電力公司四五月要繳稅和進行每年投資
+<ul>
+<li>月固定有五千萬歐元</li>
+</ul></li>
+<li>電力公司持有許多能源公司股票
+<ul>
+<li>希望公司資產不要依賴能源公司股價</li>
+</ul></li>
+<li>石油公司每季要維修海上鑽井設備
+<ul>
+<li>每季金額不定在三千到七千萬歐元</li>
+</ul></li>
+<li>石油公司持有許多原物料合約
+<ul>
+<li>希望公司資產不要受原物料市場影響</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide class="backdrop"></slide>
+</slides>
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+
+</html>

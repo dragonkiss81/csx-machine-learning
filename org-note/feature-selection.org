@@ -1,7 +1,7 @@
-#+TITLE: 特徵選取 Feature Selection
+#+TITLE: 深度學習的數學原理入門
 #+SUBTITLE: 少年圖靈計畫
 #+DATE: 2016/10/17 (一)
-#+AUTHOR: rcwangtw
+#+AUTHOR: RICKY (rcwang.tw@gmail.com)
 #+EMAIL: rcwang.tw@gmail.com
 #+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline
 #+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
@@ -21,7 +21,7 @@
 
 #+FAVICON: images/ricky.png
 #+ICON: images/ricky.png
-#+HASHTAG: feature selection, test, test
+#+HASHTAG: rcwangtw
 
 # Fork me ribbon
 #+BEGIN_HTML
@@ -725,6 +725,26 @@ print sess.run(h, feed_dict={x: input_data})
 #+ATTR_HTML: :width 1000px
 [[file:images/figure4.png]]
 #+END_CENTER
+** 捲積類神經網路 Convolutional Neural Network
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 1000px
+[[file:images/figure7.png]]
+#+END_CENTER
+** 捲積類神經網路 Convolutional Neural Network
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 1000px
+[[file:images/figure8.png]]
+#+END_CENTER
+** 捲積類神經網路 Convolutional Neural Network
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 1000px
+[[file:images/figure9.png]]
+#+END_CENTER
+** 捲積類神經網路 Convolutional Neural Network
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 1000px
+[[file:images/figure10.png]]
+#+END_CENTER
 
 ** 捲積類神經網路範例 - 1. 輸入函數庫
 
@@ -963,31 +983,28 @@ print ("Optimization Finished.")
 #+BEGIN_HTML
 $$
 \left\{\begin{matrix}
-\theta \ =& arccos( X_t )\ ,\ \ \ &-1 \leq X_t \leq 1\\
+\theta_t \ =& arccos( X_t )\ ,\ \ \ &-1 \leq X_t \leq 1\\
 \\
-r \ =& \frac{t}{N}\ ,\ \ \ &t = 1,\ 2,\ ...\ ,N
+r_t \ =& \frac{t}{N}\ ,\ \ \ &t = 1,\ 2,\ ...\ ,N
 \end{matrix}\right.
 $$
 #+END_HTML
 
 ** 格拉姆夾角法 Gramian Angular Field
 #+BEGIN_QUOTE
-格拉姆矩陣是一種特殊矩陣
+格拉姆矩陣是一種特殊矩陣，它具有記憶時間序列的暫時相依的能力。
 #+END_QUOTE
 利用格拉姆夾角法將極座標轉換成圖像：
 #+BEGIN_HTML
 $$
 \begin{pmatrix}
-cos(\phi_1+\phi_1) & \cdots & cos(\phi_1+\phi_n) \\
-cos(\phi_2+\phi_1) & \cdots & cos(\phi_2+\phi_n) \\
+cos(\theta_1+\theta_1) & \cdots & cos(\theta_1+\theta_N) \\
+cos(\theta_2+\theta_1) & \cdots & cos(\theta_2+\theta_N) \\
 \vdots  & \ddots  & \vdots \\
-cos(\phi_n+\phi_1) & \cdots & cos(\phi_n+\phi_n)
+cos(\theta_N+\theta_1) & \cdots & cos(\theta_N+\theta_N)
 \end{pmatrix}
 $$
 #+END_HTML
-
-
-
 * 萬用啟發式演算法 Metaheuristics
   :PROPERTIES:
   :SLIDE:    segue dark quote
@@ -1001,10 +1018,16 @@ $$
 #+END_CENTER
 
 ** 粒子群演算法 Particle Swarm Optimization, PSO
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 1000px
+[[file:images/figure11.png]]
+#+END_CENTER
 
 ** 蟻群演算法 Ant Colony Optimal, ACO
-
-** 人工免疫演算法 Artificial Immune Algorithm, AI
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 1000px
+[[file:images/figure12.png]]
+#+END_CENTER
 
 * 啟發式測試 ML Testing
   :PROPERTIES:
@@ -1036,6 +1059,136 @@ $$
  - 原理研究(BSR)：不輕易做假設
  - 解釋性偏好：對你是雜訊，對我不是
  - 輕量級偏好：技術與業務的深度整合最為優先
+
+* 金融的定義
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+*** 金融的定義
+「金融」是在時間尺度上進行資源交換的商業行為。
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 900px
+[[file:images/figure6.png]]
+#+END_CENTER
+
+
+
+** 金融資料的特色
+
+ - 現代大數據的生成關鍵：人的維度
+   - 而大數據能挖掘出東西：人性（一致性）
+   - 思考：金融資料有無此特性
+     - 提示：人的維度、人性 vs. 金融市場維度、心理
+     - 冷啟動：金融模型「欠缺訓練資料」
+ - 現代應用場景的關鍵：短時間尺度
+   - 大量大範圍數據 → 單次決策的優化
+   - 短時間尺度的好處：一致性、獨立性
+ - 金融模型應用場景：長時間尺度（金融的定義）
+   - 長時間尺度 → 場景交互作用 → 風控問題 → 模型解釋性問題
+   - 資源交換 　→ 未來倚賴信任 → 監管問題 → 模型抽象限制問題
+
+* 金融技術的整合
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+*** 整合技術與業務
+
+    1. 協助業務流程精簡
+       - 提高客戶的生命週期
+       - 降低客戶的流失率
+    2. 提高業務數據的重複使用率
+       - 實時追蹤
+       - 知識沉澱
+    3. 高度客製化
+       - 思考：特定的應用場景技術如何開發？
+
+*** 應用場景的挑戰
+
+    1. Xps ( X per second )
+    2. 客戶生命週期
+    3. 資金/資產的經手規模 (AUM) 的成長率
+    4. 隱私與數據安全
+       1. 數據流
+       2. 數據驗證
+    5. 思考：技術人怎麼給予業務支持
+
+* 機器人理財
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+*** 機器人理財的技術核心
+
+   解決公開市場資訊的不對稱
+       - 為什麼原本有資訊不對稱？
+         - 不同專家個體化差異難以統合（哪個尺度？）
+         - 思考：憑什麼機器人能統合？
+         - 被動投資 Beta 與主動投資 Alpha
+         - 警惕：電風扇 (傳統) 與X光 (FinTech)
+
+*** 機器人理財的技術核心
+
+    減少投資人情緒對市場的影響
+       - 為什麼投資人情緒會對市場有影響？
+         - 原因：金融市場交易的搓合制度
+         - 思考：機器人理財真的能避免嗎？
+
+*** 機器人理財的技術核心
+
+    降低服務成本與服務門檻，擴大市場佔有率
+       - 為什麼靠機器人就能降低成本？
+         - 0.5%的管理費門檻
+         - 思考：怎麼估計機器人系統的開發成本
+       - 富人的理財方式適合一般人嗎？
+         - 例子：避險基金的最低投資門檻
+
+*** 機器人理財的技術流程
+
+    1. 了解用戶的風險偏好
+       1. 敏感係數 (Delta)
+       2. 安全係數
+    2. 基於不同的風險偏好，提供不同的資產配置方案
+    3. 自動化連結客戶的帳戶進行資產配置
+    4. 對資產配置結果，實時 (Real-Time) 進行追蹤
+       1. Colocation
+       2. Risk Parity
+    5. 穩健達到理財目標，執行客戶帳戶退場機制
+       1. 惡劣的容災場景（N個9、底層隔離）
+
+* 智慧化資產管理
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+** 了解客戶風險偏好
+ - 資產管理有很多種：有房屋、土地、廠房設備、股票債券和貨幣。
+ - 了解客戶的需求
+   - 客戶生命週期
+     - 電力公司四五月要繳稅和進行每年投資
+       - 月固定有五千萬歐元
+     - 電力公司持有許多能源公司股票
+       - 希望公司資產不要依賴能源公司股價
+     - 石油公司每季要維修海上鑽井設備
+       - 每季金額不定在三千到七千萬歐元
+     - 石油公司持有許多原物料合約
+       - 希望公司資產不要受原物料市場影響
+
+** 提供不同的資產配置方案
+ - 資產管理公司的方案
+   - 投資規模：新的投資額進到管理帳戶會打亂原有策略
+   - 閉鎖期：設定管理資產可能被提領的時間點
+   - 預期報酬與承擔風險：了解客戶的期望報酬率，和可承受損失
+
 
 * Thank You
   :PROPERTIES:
